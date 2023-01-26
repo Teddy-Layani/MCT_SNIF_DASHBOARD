@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZSALES_DASHBOARD_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="ZORG_UNIT_BOARD_VH" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="OrgUnit"/>
+                </Key>
+                <Property Name="OrgUnit" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Organization ID" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Descrition" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+            </EntityType>
+            <EntityType Name="ZBRANDS_4BOARD_VH" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Brand"/>
+                    <PropertyRef Name="Spras"/>
+                </Key>
+                <Property Name="Brand" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:label="Car brand" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Spras" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Language" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="BrandDesc" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Brand description" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+            </EntityType>
+            <EntityType Name="ZSTATUS_REASON_BOARD" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Estat"/>
+                    <PropertyRef Name="SerialKey"/>
+                    <PropertyRef Name="Katalogrart"/>
+                    <PropertyRef Name="Codegruppe"/>
+                    <PropertyRef Name="Code"/>
+                </Key>
+                <Property Name="Estat" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="User status" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="SerialKey" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Katalogrart" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Catalog" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ConcKey" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Search Key" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Codegruppe" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Code Group" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Code" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+            </EntityType>
+            <EntityType Name="ZCOORDINATION_AMOUNTS" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="SerialNumber"/>
+                </Key>
+                <Property Name="SelectedDate" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Date" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="SerialNumber" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Brand" Type="Edm.String" MaxLength="18" sap:unicode="false" sap:label="Car brand" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="BrandDesc" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Brand description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PeriodType" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="Period Type" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Userstatus" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="User status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UserstatusDesc" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CountTotal" Type="Edm.Int64" sap:unicode="false" sap:label="Count" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ZSTATUS_LEADS" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="SerialNumber"/>
+                </Key>
+                <Property Name="SelectedDate" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Date" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="SerialNumber" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Userstatus" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="User status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Buffer" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="Terr. Hier. ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Brand" Type="Edm.String" MaxLength="18" sap:unicode="false" sap:label="Car brand" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="BrandDesc" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Brand description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PeriodType" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="Period Type" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="CountTotal" Type="Edm.Int64" sap:unicode="false" sap:label="Count" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="Subcomponent" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ZNEW_LEADS_BRANDS_LVL" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="SerialNumber"/>
+                </Key>
+                <Property Name="SelectedDate" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Date" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="CountTotal" Type="Edm.Int64" Nullable="false" sap:unicode="false" sap:label="Count" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SerialNumber" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Userstatus" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="User status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Brand" Type="Edm.String" MaxLength="18" sap:unicode="false" sap:label="Car brand" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="BrandDesc" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Brand description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PeriodType" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="Period Type" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+            </EntityType>
+            <EntityType Name="ZLEADS_TRANSFERRED_SALESPERSON" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="SerialNumber"/>
+                </Key>
+                <Property Name="SelectedDate" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Date" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="SerialNumber" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Brand" Type="Edm.String" MaxLength="18" sap:unicode="false" sap:label="Car brand" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="BrandDesc" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Brand description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PeriodType" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="Period Type" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Userstatus" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="User status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CountTotal" Type="Edm.Int64" sap:unicode="false" sap:label="Count" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="OrgUnit" Type="Edm.String" MaxLength="8" sap:unicode="false" sap:label="Organizational Unit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="OrgUnitDesc" Type="Edm.String" MaxLength="100" sap:unicode="false" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ZHOT_TRANSFFERED_LEADS" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="SerialNumber"/>
+                </Key>
+                <Property Name="SelectedDate" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Date" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="OrgUnit" Type="Edm.String" Nullable="false" MaxLength="14" sap:unicode="false" sap:label="Text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SerialNumber" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Brand" Type="Edm.String" MaxLength="18" sap:unicode="false" sap:label="Car brand" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Userstatus" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="User status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BrandDesc" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Brand description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PeriodType" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="Period Type" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="CountTotal" Type="Edm.Int64" sap:unicode="false" sap:label="Count" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="OrgUnitDesc" Type="Edm.String" MaxLength="100" sap:unicode="false" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ZLEAD_MAINT_BY_SALESPERSONS" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="SerialNumber"/>
+                </Key>
+                <Property Name="SelectedDate" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Date" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="SerialNumber" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Brand" Type="Edm.String" MaxLength="18" sap:unicode="false" sap:label="Car brand" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Userstatus" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="User status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BrandDesc" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Brand description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PeriodType" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="Period Type" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="CountTotal" Type="Edm.Int64" sap:unicode="false" sap:label="Count" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="OrgUnit" Type="Edm.String" MaxLength="8" sap:unicode="false" sap:label="Organizational Unit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="OrgUnitDesc" Type="Edm.String" MaxLength="100" sap:unicode="false" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ZPERIOD_TYPES" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="PeriodType"/>
+                </Key>
+                <Property Name="PeriodType" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Period Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ZLEADS_IN_CB_EXCPT_COUNT" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="SerialNumber"/>
+                </Key>
+                <Property Name="SerialNumber" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SelectedDate" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Date" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Brand" Type="Edm.String" MaxLength="18" sap:unicode="false" sap:label="Car brand" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="BrandDesc" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Brand description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PeriodType" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="Period Type" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="CountTotal" Type="Edm.Int64" sap:unicode="false" sap:label="Count" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="OrgUnit" Type="Edm.String" MaxLength="14" sap:unicode="false" sap:label="Text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="OrgUnitDesc" Type="Edm.String" MaxLength="100" sap:unicode="false" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Partner" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PartnerName" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="PARTNER_NAME" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityContainer Name="ZSALES_DASHBOARD_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="ZORG_UNIT_BOARD_VHSet" EntityType="ZSALES_DASHBOARD_SRV.ZORG_UNIT_BOARD_VH" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ZBRANDS_4BOARD_VHSet" EntityType="ZSALES_DASHBOARD_SRV.ZBRANDS_4BOARD_VH" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ZSTATUS_REASON_BOARDSet" EntityType="ZSALES_DASHBOARD_SRV.ZSTATUS_REASON_BOARD" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ZCOORDINATION_AMOUNTSSet" EntityType="ZSALES_DASHBOARD_SRV.ZCOORDINATION_AMOUNTS" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ZSTATUS_LEADSSet" EntityType="ZSALES_DASHBOARD_SRV.ZSTATUS_LEADS" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ZNEW_LEADS_BRANDS_LVLSet" EntityType="ZSALES_DASHBOARD_SRV.ZNEW_LEADS_BRANDS_LVL" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ZLEADS_TRANSFERRED_SALESPERSONSet" EntityType="ZSALES_DASHBOARD_SRV.ZLEADS_TRANSFERRED_SALESPERSON" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ZHOT_TRANSFFERED_LEADSSet" EntityType="ZSALES_DASHBOARD_SRV.ZHOT_TRANSFFERED_LEADS" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ZLEAD_MAINT_BY_SALESPERSONSSet" EntityType="ZSALES_DASHBOARD_SRV.ZLEAD_MAINT_BY_SALESPERSONS" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ZPERIOD_TYPESSet" EntityType="ZSALES_DASHBOARD_SRV.ZPERIOD_TYPES" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ZLEADS_IN_CB_EXCPT_COUNTSet" EntityType="ZSALES_DASHBOARD_SRV.ZLEADS_IN_CB_EXCPT_COUNT" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+            </EntityContainer>
+            <atom:link rel="self" href="https://sapdev.mct.co.il:50201/sap/opu/odata/sap/ZSALES_DASHBOARD_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://sapdev.mct.co.il:50201/sap/opu/odata/sap/ZSALES_DASHBOARD_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

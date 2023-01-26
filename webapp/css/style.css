@@ -1,0 +1,5 @@
+/* Enter your custom styles here */
+.HBoxShadow {
+    box-shadow: 0 0 10px 0px lightgrey;
+    border-radius: 1rem;
+}
