@@ -3,3 +3,12 @@
     box-shadow: 0 0 10px 0px lightgrey;
     border-radius: 1rem;
 }
+
+.selectRadius .sapMInputBaseContentWrapper{
+    border-radius: 2rem !important;
+    border-color: #0854a0;
+}
+
+.textBold {
+    font-weight: bold;
+}

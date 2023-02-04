@@ -3,63 +3,61 @@
     xmlns:viz="sap.viz.ui5.controls"
     xmlns:viz.data="sap.viz.ui5.data"
     xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
-    xmlns="sap.m">
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+	xmlns="sap.m">
     <Page id="page" title="{i18n>title}">
         <VBox>
             <HBox
                 justifyContent="SpaceBetween"
+                alignItems="Center"
                 class="sapUiSmallMargin">
                 <HBox>
                     <DatePicker 
+                        value="{
+                            path:'mainView>/date',
+                            type:'sap.ui.model.type.Date',
+                            formatOptions: {
+                                style: 'medium',
+                                strictParsing: true
+                            }
+                        }"
                         class="sapUiSmallMarginEnd"/>
                     <ComboBox 
-                        class="sapUiSmallMarginBegin"/>
-                    <ComboBox
-                        class="sapUiSmallMarginBegin"/>
+                        placeholder="{i18n>BRAND}"
+                        selectedKey="{mainView>/selectedBrand}"
+                        items="{    
+                            path: '/ZBRANDS_4BOARD_VHSet',
+					        sorter: { path: 'BrandDesc' }
+				        }"
+                        selectionChange="onFilterChange"
+                        class="selectRadius sapUiSmallMarginBegin">
+                        <core:Item key="{Brand}" text="{BrandDesc}"/>
+                    </ComboBox>
+                    <ComboBox 
+                        class="selectRadius sapUiSmallMarginBegin" 
+                        selectedKey="{mainView>/selectedTeam}"
+                        items="{mainView>/comboBoxTeam}" 
+                        selectionChange="onFilterChange" >
+                        <core:Item key="{mainView>key}" text="{mainView>text}" />
+                    </ComboBox>
                 </HBox>
-
+                
                 <Text 
-                    text="{i18n>FILTER_BY}"/>
+                    text="{i18n>FILTER_BY}"
+                    class="textBold"/>
             </HBox>
-
-            <HBox>
+            <l:Grid
+                containerQuery="true"
+                vSpacing="0"
+                defaultSpan="L4 M12 S12">
                 <HBox
-                    class="HBoxShadow sapUiSmallMargin">
+                    class="HBoxShadow sapUiSmallMarginTop">
                     <viz:VizFrame 
                         id="idChar01" 
                         uiConfig="{applicationSet:'fiori'}"
                         vizProperties="{mainView>/chart01}"
-                        width="35rem" height="20rem" vizType='donut'>
-                        <viz:dataset>
-                            <viz.data:FlattenedDataset data="{/ZLEADS_IN_CB_EXCPT_COUNTSet}">
-                                <viz.data:dimensions>
-                                    <viz.data:DimensionDefinition name="PartnerName"
-                                        value="{PartnerName}" />
-                                </viz.data:dimensions>
-                                <viz.data:measures>
-                                    <viz.data:MeasureDefinition name="CountTotal"
-                                        value="{CountTotal}" />
-                                </viz.data:measures>
-                            </viz.data:FlattenedDataset>
-                        </viz:dataset>
-
-                        <viz:feeds>
-                            <viz.feeds:FeedItem uid="size" type="Measure"
-                                values="CountTotal" />
-                            <viz.feeds:FeedItem uid="color" type="Dimension"
-                                values="PartnerName" />
-                        </viz:feeds>
-                    </viz:VizFrame>
-                </HBox>
-
-                <HBox
-                    class="HBoxShadow sapUiSmallMargin">
-                    <viz:VizFrame 
-                        id="idChar02" 
-                        uiConfig="{applicationSet:'fiori'}"
-                        vizProperties="{mainView>/chart02}"
-                        renderComplete="renderComplete"
-                        width="35rem" height="20rem" vizType='column'>
+                        vizType='column'>
                         <viz:dataset>
                             <viz.data:FlattenedDataset data="{/ZCOORDINATION_AMOUNTSSet}">
                                 <viz.data:dimensions>
@@ -74,21 +72,21 @@
                         </viz:dataset>
 
                         <viz:feeds>
-                            <viz.feeds:FeedItem id='valueAxisFeed' uid="valueAxis" type="Measure"
+                            <viz.feeds:FeedItem uid="valueAxis" type="Measure"
                                 values="CountTotal" />
-                            <viz.feeds:FeedItem id='categoryAxisFeed' uid="categoryAxis" type="Dimension"
+                            <viz.feeds:FeedItem uid="categoryAxis" type="Dimension"
                                 values="UserstatusDesc" />
                         </viz:feeds>
                     </viz:VizFrame>
                 </HBox>
 
                 <HBox
-                    class="HBoxShadow sapUiSmallMargin">
+                    class="HBoxShadow sapUiSmallMarginTop">
                     <viz:VizFrame 
-                        id="idChar03" 
+                        id="idChar02" 
                         uiConfig="{applicationSet:'fiori'}"
-                        vizProperties="{mainView>/chart01}"
-                        width="35rem" height="20rem" vizType='donut'>
+                        vizProperties="{mainView>/chart02}"
+                        vizType='donut'>
                         <viz:dataset>
                             <viz.data:FlattenedDataset data="{/ZLEADS_IN_CB_EXCPT_COUNTSet}">
                                 <viz.data:dimensions>
@@ -110,7 +108,164 @@
                         </viz:feeds>
                     </viz:VizFrame>
                 </HBox>
-            </HBox>
+
+                <HBox
+                    class="HBoxShadow sapUiSmallMarginTop">
+                    <viz:VizFrame 
+                        id="idChar03" 
+                        uiConfig="{applicationSet:'fiori'}"
+                        vizProperties="{mainView>/chart03}"
+                        vizType='donut'>
+                        <viz:dataset>
+                            <viz.data:FlattenedDataset data="{/ZNEW_LEADS_BRANDS_LVLSet}">
+                                <viz.data:dimensions>
+                                    <viz.data:DimensionDefinition name="BrandDesc"
+                                        value="{BrandDesc}" />
+                                </viz.data:dimensions>
+                                <viz.data:measures>
+                                    <viz.data:MeasureDefinition name="CountTotal"
+                                        value="{CountTotal}" />
+                                </viz.data:measures>
+                            </viz.data:FlattenedDataset>
+                        </viz:dataset>
+
+                        <viz:feeds>
+                            <viz.feeds:FeedItem uid="size" type="Measure"
+                                values="CountTotal" />
+                            <viz.feeds:FeedItem uid="color" type="Dimension"
+                                values="BrandDesc" />
+                        </viz:feeds>
+                    </viz:VizFrame>
+                </HBox>
+
+                <HBox
+                    class="HBoxShadow sapUiSmallMarginTop">
+                    <viz:VizFrame 
+                        id="idChar04" 
+                        uiConfig="{applicationSet:'fiori'}"
+                        vizProperties="{mainView>/chart04}"
+                        renderComplete="renderComplete"
+                        vizType='column'>
+                        <viz:dataset>
+                            <viz.data:FlattenedDataset data="{/ZHOT_TRANSFFERED_LEADSSet}">
+                                <viz.data:dimensions>
+                                    <viz.data:DimensionDefinition name="OrgUnitDesc"
+                                        value="{OrgUnitDesc}" />
+                                </viz.data:dimensions>
+                                <viz.data:measures>
+                                    <viz.data:MeasureDefinition name="CountTotal"
+                                        value="{CountTotal}" />
+                                </viz.data:measures>
+                            </viz.data:FlattenedDataset>
+                        </viz:dataset>
+
+                        <viz:feeds>
+                            <viz.feeds:FeedItem  uid="valueAxis" type="Measure"
+                                values="CountTotal" />
+                            <viz.feeds:FeedItem  uid="categoryAxis" type="Dimension"
+                                values="OrgUnitDesc" />
+                        </viz:feeds>
+                    </viz:VizFrame>
+                </HBox>
+
+                <HBox
+                    class="HBoxShadow sapUiSmallMarginTop">
+                    <viz:VizFrame 
+                        id="idChar05" 
+                        uiConfig="{applicationSet:'fiori'}"
+                        vizProperties="{mainView>/chart05}"
+                        renderComplete="renderComplete"
+                        vizType='column'>
+                        <viz:dataset>
+                            <viz.data:FlattenedDataset data="{/ZLEADS_TRANSFERRED_SALESPERSONSet}">
+                                <viz.data:dimensions>
+                                    <viz.data:DimensionDefinition name="OrgUnitDesc"
+                                        value="{OrgUnitDesc}" />
+                                </viz.data:dimensions>
+                                <viz.data:measures>
+                                    <viz.data:MeasureDefinition name="CountTotal"
+                                        value="{CountTotal}" />
+                                </viz.data:measures>
+                            </viz.data:FlattenedDataset>
+                        </viz:dataset>
+
+                        <viz:feeds>
+                            <viz.feeds:FeedItem  uid="valueAxis" type="Measure"
+                                values="CountTotal" />
+                            <viz.feeds:FeedItem  uid="categoryAxis" type="Dimension"
+                                values="OrgUnitDesc" />
+                        </viz:feeds>
+                    </viz:VizFrame>
+                </HBox>
+
+                <HBox
+                    class="HBoxShadow sapUiSmallMarginTop">
+                    <viz:VizFrame 
+                        id="idChar06" 
+                        uiConfig="{applicationSet:'fiori'}"
+                        vizProperties="{mainView>/chart06}"
+                        renderComplete="renderComplete"
+                        vizType='column'>
+                        <viz:dataset>
+                            <viz.data:FlattenedDataset data="{/ZLEAD_MAINT_BY_SALESPERSONSSet}">
+                                <viz.data:dimensions>
+                                    <viz.data:DimensionDefinition name="OrgUnitDesc"
+                                        value="{OrgUnitDesc}" />
+                                </viz.data:dimensions>
+                                <viz.data:measures>
+                                    <viz.data:MeasureDefinition name="CountTotal"
+                                        value="{CountTotal}" />
+                                </viz.data:measures>
+                            </viz.data:FlattenedDataset>
+                        </viz:dataset>
+
+                        <viz:feeds>
+                            <viz.feeds:FeedItem  uid="valueAxis" type="Measure"
+                                values="CountTotal" />
+                            <viz.feeds:FeedItem  uid="categoryAxis" type="Dimension"
+                                values="OrgUnitDesc" />
+                        </viz:feeds>
+                    </viz:VizFrame>
+                </HBox>
+
+                <HBox
+                    class="sapUiSmallMarginTop">
+                </HBox>
+
+                <HBox
+                    class="HBoxShadow sapUiSmallMarginTop">
+                    <viz:VizFrame 
+                        id="idChar07" 
+                        uiConfig="{applicationSet:'fiori'}"
+                        vizProperties="{mainView>/chart07}"
+                        vizType='bullet'>
+                        <viz:dataset>
+                            <viz.data:FlattenedDataset data="{/ZSTATUS_LEADSSet}">
+                                <viz.data:dimensions>
+                                    <viz.data:DimensionDefinition name="Description"
+                                        value="{Description}" />
+                                </viz.data:dimensions>
+                                <viz.data:measures>
+                                    <viz.data:MeasureDefinition name="CountTotal"
+                                        value="{CountTotal}" />
+                                </viz.data:measures>
+                            </viz.data:FlattenedDataset>
+                        </viz:dataset>
+
+                        <viz:feeds>
+                            <viz.feeds:FeedItem uid="actualValues" type="Measure"
+                                values="CountTotal" />
+                            <viz.feeds:FeedItem uid="categoryAxis" type="Dimension"
+                                values="Description" />
+                        </viz:feeds>
+                    </viz:VizFrame>
+                </HBox>
+
+                <HBox
+                    class="sapUiSmallMarginTop">
+                </HBox>
+
+   		    </l:Grid>
             
             <HBox>
             </HBox>
