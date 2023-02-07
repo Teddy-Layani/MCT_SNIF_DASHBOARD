@@ -12,7 +12,28 @@
                 justifyContent="SpaceBetween"
                 alignItems="Center"
                 class="sapUiSmallMargin">
+                <Text 
+                    text="{i18n>FILTER_BY}"
+                    class="textBold"/>
                 <HBox>
+                    <ComboBox 
+                        class="selectRadius sapUiSmallMarginEnd" 
+                        selectedKey="{mainView>/selectedTeam}"
+                        items="{mainView>/comboBoxTeam}" 
+                        selectionChange="onFilterChange" >
+                        <core:Item key="{mainView>key}" text="{mainView>text}" />
+                    </ComboBox>
+                    <ComboBox 
+                        placeholder="{i18n>BRAND}"
+                        selectedKey="{mainView>/selectedBrand}"
+                        items="{    
+                            path: '/ZBRANDS_4BOARD_VHSet',
+					        sorter: { path: 'BrandDesc' }
+				        }"
+                        selectionChange="onFilterChange"
+                        class="selectRadius sapUiSmallMarginEnd">
+                        <core:Item key="{Brand}" text="{BrandDesc}"/>
+                    </ComboBox>
                     <DatePicker 
                         value="{
                             path:'mainView>/date',
@@ -23,29 +44,7 @@
                             }
                         }"
                         class="sapUiSmallMarginEnd"/>
-                    <ComboBox 
-                        placeholder="{i18n>BRAND}"
-                        selectedKey="{mainView>/selectedBrand}"
-                        items="{    
-                            path: '/ZBRANDS_4BOARD_VHSet',
-					        sorter: { path: 'BrandDesc' }
-				        }"
-                        selectionChange="onFilterChange"
-                        class="selectRadius sapUiSmallMarginBegin">
-                        <core:Item key="{Brand}" text="{BrandDesc}"/>
-                    </ComboBox>
-                    <ComboBox 
-                        class="selectRadius sapUiSmallMarginBegin" 
-                        selectedKey="{mainView>/selectedTeam}"
-                        items="{mainView>/comboBoxTeam}" 
-                        selectionChange="onFilterChange" >
-                        <core:Item key="{mainView>key}" text="{mainView>text}" />
-                    </ComboBox>
                 </HBox>
-                
-                <Text 
-                    text="{i18n>FILTER_BY}"
-                    class="textBold"/>
             </HBox>
             <l:Grid
                 containerQuery="true"
@@ -53,8 +52,11 @@
                 defaultSpan="L4 M12 S12">
                 <HBox
                     class="HBoxShadow sapUiSmallMarginTop">
+                    <viz:Popover id="idPopOverChar01"></viz:Popover>
                     <viz:VizFrame 
                         id="idChar01" 
+                        width="35rem"
+                        height="20rem"
                         uiConfig="{applicationSet:'fiori'}"
                         vizProperties="{mainView>/chart01}"
                         vizType='column'>
@@ -82,8 +84,11 @@
 
                 <HBox
                     class="HBoxShadow sapUiSmallMarginTop">
+                    <viz:Popover id="idPopOverChar02"></viz:Popover>
                     <viz:VizFrame 
                         id="idChar02" 
+                        width="35rem"
+                        height="20rem"
                         uiConfig="{applicationSet:'fiori'}"
                         vizProperties="{mainView>/chart02}"
                         vizType='donut'>
@@ -111,8 +116,11 @@
 
                 <HBox
                     class="HBoxShadow sapUiSmallMarginTop">
+                    <viz:Popover id="idPopOverChar03"></viz:Popover>
                     <viz:VizFrame 
                         id="idChar03" 
+                        width="35rem"
+                        height="20rem"
                         uiConfig="{applicationSet:'fiori'}"
                         vizProperties="{mainView>/chart03}"
                         vizType='donut'>
@@ -140,8 +148,11 @@
 
                 <HBox
                     class="HBoxShadow sapUiSmallMarginTop">
+                    <viz:Popover id="idPopOverChar04"></viz:Popover>
                     <viz:VizFrame 
                         id="idChar04" 
+                        width="35rem"
+                        height="20rem"
                         uiConfig="{applicationSet:'fiori'}"
                         vizProperties="{mainView>/chart04}"
                         renderComplete="renderComplete"
@@ -170,8 +181,11 @@
 
                 <HBox
                     class="HBoxShadow sapUiSmallMarginTop">
+                    <viz:Popover id="idPopOverChar05"></viz:Popover>
                     <viz:VizFrame 
                         id="idChar05" 
+                        width="35rem"
+                        height="20rem"
                         uiConfig="{applicationSet:'fiori'}"
                         vizProperties="{mainView>/chart05}"
                         renderComplete="renderComplete"
@@ -200,8 +214,11 @@
 
                 <HBox
                     class="HBoxShadow sapUiSmallMarginTop">
+                    <viz:Popover id="idPopOverChar06"></viz:Popover>
                     <viz:VizFrame 
                         id="idChar06" 
+                        width="35rem"
+                        height="20rem"
                         uiConfig="{applicationSet:'fiori'}"
                         vizProperties="{mainView>/chart06}"
                         renderComplete="renderComplete"
@@ -229,13 +246,43 @@
                 </HBox>
 
                 <HBox
-                    class="sapUiSmallMarginTop">
-                </HBox>
+                    class="sapUiSmallMarginTop"/>
 
                 <HBox
                     class="HBoxShadow sapUiSmallMarginTop">
+                    <viz:Popover id="idPopOverChar07"></viz:Popover>
                     <viz:VizFrame 
                         id="idChar07" 
+                        width="35rem"
+                        height="20rem"
+                        uiConfig="{applicationSet:'fiori'}"
+                        vizProperties="{mainView>/chart07}"
+                        vizType='column'>
+                        <viz:dataset>
+                            <viz.data:FlattenedDataset data="{/ZSTATUS_LEADSSet}">
+                                <viz.data:dimensions>
+                                    <viz.data:DimensionDefinition name="Description"
+                                        value="{Description}" />
+                                </viz.data:dimensions>
+                                <viz.data:measures>
+                                    <viz.data:MeasureDefinition name="CountTotal"
+                                        value="{CountTotal}" />
+                                </viz.data:measures>
+                            </viz.data:FlattenedDataset>
+                        </viz:dataset>
+
+                        <viz:feeds>
+                            <viz.feeds:FeedItem uid="valueAxis" type="Measure"
+                                values="CountTotal" />
+                            <viz.feeds:FeedItem uid="categoryAxis" type="Dimension"
+                                values="Description" />
+                        </viz:feeds>
+                    </viz:VizFrame>
+
+                    <!-- <viz:VizFrame 
+                        id="idChar07" 
+                        width="35rem"
+                        height="20rem"
                         uiConfig="{applicationSet:'fiori'}"
                         vizProperties="{mainView>/chart07}"
                         vizType='bullet'>
@@ -253,12 +300,12 @@
                         </viz:dataset>
 
                         <viz:feeds>
-                            <viz.feeds:FeedItem uid="actualValues" type="Measure"
+                            <viz.feeds:FeedItem uid="valueAxis" type="Measure"
                                 values="CountTotal" />
                             <viz.feeds:FeedItem uid="categoryAxis" type="Dimension"
                                 values="Description" />
                         </viz:feeds>
-                    </viz:VizFrame>
+                    </viz:VizFrame> -->
                 </HBox>
 
                 <HBox

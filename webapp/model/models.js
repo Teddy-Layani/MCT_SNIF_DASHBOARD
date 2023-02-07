@@ -20,10 +20,6 @@ sap.ui.define([
                 return oModel;
             },
 
-            getText: function (sKey, aParameters=[]) {
-                this.getView().getModel("i18n").getResourceBundle().getText(sKey, aParameters);
-            },
-
             viewModel: function(sViewName) {
                 let oDefault = {};
 
@@ -37,36 +33,103 @@ sap.ui.define([
                             comboBoxTeam: [ { key: "1", text: "Display as me"},
                                             { key: "2", text: "Display as Teams"}],
                             chart01: {
-                                title:{ 
-                                    text:       "Chart 01"//this.getText("SLA_EXCEPTIONS")
+                                interaction: {
+                                    selectability: {
+                                        mode: "EXCLUSIVE"
+                                    }
                                 },
-                                dataLabel:{
-                                    visible:    true,
-                                    showTotal:  false
-                                },
-                                categoryAxis: {
+                                valueAxis: {
+                                    title: {
+                                        visible: false
+                                    },
+                                    visible: true,
                                     axisLine: {
                                         visible: false
+                                    },
+                                    label: {
+                                        linesOfWrap: 2,
+                                        visible: false,
+                                        style: {
+                                            fontSize: "10px"
+                                        }
                                     }
+                                },
+                                categoryAxis: {
+                                    title: {
+                                        visible: false
+                                    },
+                                    label: {
+                                        linesOfWrap: 2,
+                                        rotation: "fixed",
+                                        angle: 0,
+                                        style: {
+                                            fontSize: "12px"
+                                        }
+                                    },
+                                    axisLine: {
+                                        visible: false
+                                    },
+                                    axisTick: {
+                                        shortTickVisible: false
+                                    }
+                                },
+                                title: {
+                                    text:       this.getText("COORDINATION"),
+                                    visible:    true
+                                },
+                                legend: {
+                                    visible: false
+                                },
+                                plotArea: {
+                                    colorPalette: ["#" + Math.floor(Math.random()*16777215).toString(16)],//["#007181"],
+                                    gridline: {
+                                        visible: false
+                                    },
+                                    dataLabel: {
+                                        visible: true,
+                                        style: {
+                                            fontWeight: 'bold'
+                                        },
+                                        hideWhenOverlap: false
+                                    }//,
+                                    // dataPointStyle:{
+                                    //     "rules":
+                                    //         [
+                                    //             {
+                                    //                 "dataContext": {"Revenue": {"max": 1500000}},
+                                    //                 "properties": {
+                                    //                     "color":"sapUiChartPaletteSemanticBad"
+                                    //                 },
+                                    //                 "displayName":"Revenue < 1.5M"
+                                    //             }
+                                    //         ],
+                                    //         "others":
+                                    //         {
+                                    //             "properties": {
+                                    //                 "color": "sapUiChartPaletteSemanticGood"
+                                    //             },
+                                    //             "displayName": "Revenue > 1.5M"
+                                    //         }
+                                    // }
                                 }
                             },
                             chart02: {
                                 title:{ 
-                                    text: 'Test 01'
+                                    text: this.getText("SLA_EXCEPTIONS")
                                 },
                                 dataLabel:{
                                     visible:    true,
                                     showTotal:  true}, 
                                 categoryAxis:{
                                     title: {visible: false}
-                                },
-                                plotArea: { 
-                                    colorPalette: ['green', 'red', '#711e82', '#40c7a1', '#969696'] 
-                                }
+                                }//,
+                                // plotArea: { 
+                                //     colorPalette: ['green', 'red', '#711e82', '#40c7a1', '#969696'] 
+                                // }
                             },
                             chart03: {
                                 title:{ 
-                                    text:       'Test 03'
+                                    text:       this.getText("NEW_LEADS_BRAND_LEVEL")
                                 },
                                 dataLabel:{
                                     visible:    true,
@@ -74,39 +137,387 @@ sap.ui.define([
                                 }
                             },
                             chart04: {
-                                title:{ 
-                                    text:       'Test 04'
+                                interaction: {
+                                    selectability: {
+                                        mode: "EXCLUSIVE"
+                                    }
                                 },
-                                dataLabel:{
-                                    visible:    true,
-                                    showTotal:  false
+                                valueAxis: {
+                                    title: {
+                                        visible: false
+                                    },
+                                    visible: true,
+                                    axisLine: {
+                                        visible: false
+                                    },
+                                    label: {
+                                        linesOfWrap: 2,
+                                        visible: false,
+                                        style: {
+                                            fontSize: "10px"
+                                        }
+                                    }
+                                },
+                                categoryAxis: {
+                                    title: {
+                                        visible: false
+                                    },
+                                    label: {
+                                        linesOfWrap: 2,
+                                        rotation: "fixed",
+                                        angle: 0,
+                                        style: {
+                                            fontSize: "12px"
+                                        }
+                                    },
+                                    axisLine: {
+                                        visible: false
+                                    },
+                                    axisTick: {
+                                        shortTickVisible: false
+                                    }
+                                },
+                                title:{ 
+                                    text:       this.getText("TRANSFER_SALESMAN"),
+                                    visible:    true
+                                },
+                                legend: {
+                                    visible: false
+                                },
+                                plotArea: {
+                                    colorPalette: ["#" + Math.floor(Math.random()*16777215).toString(16)],//["#007181"],
+                                    gridline: {
+                                        visible: false
+                                    },
+                                    dataLabel: {
+                                        visible: true,
+                                        style: {
+                                            fontWeight: 'bold'
+                                        },
+                                        hideWhenOverlap: false
+                                    }
                                 }
                             },
                             chart05: {
-                                title:{ 
-                                    text:       'Test 05'
+                                interaction: {
+                                    selectability: {
+                                        mode: "EXCLUSIVE"
+                                    }
                                 },
-                                dataLabel:{
-                                    visible:    true,
-                                    showTotal:  false
-                                }
-                            },
+                                valueAxis: {
+                                    title: {
+                                        visible: false
+                                    },
+                                    visible: true,
+                                    axisLine: {
+                                        visible: false
+                                    },
+                                    label: {
+                                        linesOfWrap: 2,
+                                        visible: false,
+                                        style: {
+                                            fontSize: "10px"
+                                        }
+                                    }
+                                },
+                                categoryAxis: {
+                                    title: {
+                                        visible: false
+                                    },
+                                    label: {
+                                        linesOfWrap: 2,
+                                        rotation: "fixed",
+                                        angle: 0,
+                                        style: {
+                                            fontSize: "12px"
+                                        }
+                                    },
+                                    axisLine: {
+                                        visible: false
+                                    },
+                                    axisTick: {
+                                        shortTickVisible: false
+                                    }
+                                },
+                                title:{ 
+                                    text:       this.getText("HOT_TRANSFER"),
+                                    visible:    true
+                                },
+                                legend: {
+                                    visible: false
+                                },
+                                plotArea: {
+                                    colorPalette: ["#" + Math.floor(Math.random()*16777215).toString(16)],//["#007181"],
+                                    gridline: {
+                                        visible: false
+                                    },
+                                    dataLabel: {
+                                        visible: true,
+                                        style: {
+                                            fontWeight: 'bold'
+                                        },
+                                        hideWhenOverlap: false
+                                    }
+                                }                            },
                             chart06: {
-                                title:{ 
-                                    text:       'Test 06'
+                                interaction: {
+                                    selectability: {
+                                        mode: "EXCLUSIVE"
+                                    }
                                 },
-                                dataLabel:{
-                                    visible:    true,
-                                    showTotal:  false
+                                valueAxis: {
+                                    title: {
+                                        visible: false
+                                    },
+                                    visible: true,
+                                    axisLine: {
+                                        visible: false
+                                    },
+                                    label: {
+                                        linesOfWrap: 2,
+                                        visible: false,
+                                        style: {
+                                            fontSize: "10px"
+                                        }
+                                    }
+                                },
+                                categoryAxis: {
+                                    title: {
+                                        visible: false
+                                    },
+                                    label: {
+                                        linesOfWrap: 2,
+                                        rotation: "fixed",
+                                        angle: 0,
+                                        style: {
+                                            fontSize: "12px"
+                                        }
+                                    },
+                                    axisLine: {
+                                        visible: false
+                                    },
+                                    axisTick: {
+                                        shortTickVisible: false
+                                    }
+                                },
+                                title:{ 
+                                    text:       this.getText("PROCESS_SALESMAN"),
+                                    visible:    true
+                                },
+                                legend: {
+                                    visible: false
+                                },
+                                plotArea: {
+                                    colorPalette: ["#" + Math.floor(Math.random()*16777215).toString(16)],//["#007181"],
+                                    gridline: {
+                                        visible: false
+                                    },
+                                    dataLabel: {
+                                        visible: true,
+                                        style: {
+                                            fontWeight: 'bold'
+                                        },
+                                        hideWhenOverlap: false
+                                    }
                                 }
+
+
+
+                                //     legend: {
+                                //     visible: false
+                                // },
+                                // plotArea: {
+                                //     colorPalette: ["#007181"],
+                                //     gridline: {
+                                //         visible: false
+                                //     },
+                                //     dataLabel: {
+                                //         visible: true,
+                                //         style: {
+                                //             fontWeight: 'bold'
+                                //         },
+                                //         hideWhenOverlap: false
+                                //     },
+                                //     dataPointStyleMode: "update",
+                                //     dataPointStyle: {
+                                //         "rules": [{
+                                //             "dataContext": {
+                                //                 "Type": {
+                                //                     equal: "cost"
+                                //                 }
+                                //             },
+                                //             //"dataContext":  { Category: "Revenue" },
+                                //             "properties": {
+                                //                 "color": "#cdcdcd"
+                                //             },
+                                //             displayName: "Cost"
+                                //         },
+                                //         {
+                                //             "dataContext": {
+                                //                 "Type": {
+                                //                     equal: "revenue"
+                                //                 }
+                                //             },
+                                //             "properties": {
+                                //                 "color": "#cdcdcd"
+                                //             },
+                                //             displayName: "Revenue"
+                                //         },
+                                //         {
+                                //             "dataContext": {
+                                //                 "Type": {
+                                //                     equal: "subtotal:2"
+                                //                 }
+                                //             },
+                                //             "properties": {
+                                //                 "color": "#666666"
+                                //             },
+                                //             displayName: "Subtotal"
+                                //         },
+                                //         {
+                                //             "dataContext": {
+                                //                 "Type": {
+                                //                     equal: "total"
+                                //                 }
+                                //             },
+                                //             "properties": {
+                                //                 "color": "#000000"
+                                //             },
+                                //             displayName: "Total"
+                                //         }]
+                                //     }
+                                // }
                             },
                             chart07: {
-                                title:{ 
-                                    text:       'Test 07'
+                                interaction: {
+                                    selectability: {
+                                        mode: "EXCLUSIVE"
+                                    }
                                 },
-                                dataLabel:{
-                                    visible:    true,
-                                    showTotal:  false
+                                valueAxis: {
+                                    title: {
+                                        visible: false
+                                    },
+                                    visible: true,
+                                    axisLine: {
+                                        visible: false
+                                    },
+                                    label: {
+                                        linesOfWrap: 2,
+                                        visible: false,
+                                        style: {
+                                            fontSize: "10px"
+                                        }
+                                    }
+                                },
+                                categoryAxis: {
+                                    title: {
+                                        visible: false
+                                    },
+                                    label: {
+                                        linesOfWrap: 3,
+                                        rotation: "fixed",
+                                        angle: 0,
+                                        style: {
+                                            fontSize: "12px"
+                                        }
+                                    },
+                                    axisLine: {
+                                        visible: false
+                                    },
+                                    axisTick: {
+                                        shortTickVisible: false
+                                    }
+                                },
+                                title: {
+                                    text:       this.getText("STATUS_LEADS"),
+                                    visible:    true
+                                },
+                                legend: {
+                                    visible: false
+                                },
+                                plotArea: {
+                                    colorPalette: ["#" + Math.floor(Math.random()*16777215).toString(16)],//["#007181"],
+                                    gridline: {
+                                        visible: false
+                                    },
+                                    dataLabel: {
+                                        visible: true,
+                                        style: {
+                                            fontWeight: 'bold'
+                                        },
+                                        hideWhenOverlap: false
+                                    }
+                                }
+                            },
+
+                            chart077: {
+                                interaction: {
+                                    zoom: {
+                                        enablement: "disabled"
+                                    },
+                                    selectability: {
+                                        mode: "EXCLUSIVE"
+                                    }
+                                },
+                                valueAxis: {
+                                    title: {
+                                        visible: false
+                                    },
+                                    visible: true,
+                                    axisLine: {
+                                        visible: false
+                                    },
+                                    label: {
+                                        linesOfWrap: 2,
+                                        visible: false,
+                                        style: {
+                                            fontSize: "10px"
+                                        }
+                                    }
+                                },
+                                categoryAxis: {
+                                    title: {
+                                        visible: false
+                                    },
+                                    label: {
+                                        linesOfWrap: 2,
+                                        rotation: "fixed",
+                                        angle: 0,
+                                        style: {
+                                            fontSize: "12px"
+                                        }
+                                    },
+                                    axisLine: {
+                                        visible: true
+                                    },
+                                    axisTick: {
+                                        shortTickVisible: false
+                                    }
+                                },
+                                title: {
+                                    text: this.getText("STATUS_LEADS"),
+                                    visible: true
+                                },
+                                legend: {
+                                    visible: false
+                                },
+                                plotArea: {
+                                    colorPalette: ["#007181"],
+                                    gridline: {
+                                        visible: false
+                                    },
+                                    dataPointSize: {
+                                        max: 96,
+                                        min: 40
+                                    },
+                                    dataLabel: {
+                                        visible: true,
+                                        style: {
+                                            fontWeight: 'bold'
+                                        },
+                                        hideWhenOverlap: false
+                                    }
                                 }
                             }
                             

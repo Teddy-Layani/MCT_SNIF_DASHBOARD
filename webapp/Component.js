@@ -34,9 +34,14 @@ sap.ui.define([
                 this.initModels();
             },
 
+            getText: function (sKey, aParameters=[]) {
+                return this.getModel("i18n").getResourceBundle().getText(sKey, aParameters);
+            },
+
             initModels: function() {
-                this.setModel(models.viewModel("main"), "mainView");
+                this.setModel(models.viewModel.call(this,"main"), "mainView");
             }
+
         });
     }
 );
