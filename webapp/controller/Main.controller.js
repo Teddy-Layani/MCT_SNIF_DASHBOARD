@@ -28,23 +28,52 @@ sap.ui.define([
             onFilterChange: function(oEvent) {
                 let i           = 0,
                     aFilter     = [],
-                    oModelData  = this.getOwnerComponent().getModel("mainView").getData();
+                    oModel      = this.getOwnerComponent().getModel("mainView"),
+                    oModelData  = oModel.getData();
+
+                if(oModelData.selectedBrand)    
+                {
+                    aFilter.push(
+                        new Filter("Brand", "EQ",oModelData.selectedBrand)
+                    );
+                }
+
+                if(oModelData.PeriodType)    
+                {
+                    aFilter.push(
+                        new Filter("PeriodType", "EQ",oModelData.PeriodType)
+                    );
+                }   
+
+
+                if(oModelData.date)    
+                {
+                    aFilter.push(
+                        new Filter("SelectedDate", "EQ",oModelData.date)
+                    );
+                }   
+
+                var oFilter =  new Filter({
+                    filters: aFilter,
+                    and: true
+                  });
                 
-                aFilter.push(
-                    new Filter("Brand", "EQ",oModelData.selectedBrand)
-                );
-               
                 do {
                     i++;
 
-                    this["oVizFrame" + i].getDataset().getBinding("data").filter(aFilter);
+                    //  Apply Filter
+                    this["oVizFrame" + i].getDataset().getBinding("data").filter(oFilter);
+                    
+                    //  Set Busy
+                    oModel.setProperty("/busyChar0" + i, true);
+                
                 }
                 while (i < 7);
 
-            }
+            },
             
-            // renderComplete: function(oEvent) {
-            //     debugger;
-            // }
+            renderComplete: function(oEvent) {
+                oEvent.getSource().setBusy(false);
+            }
         });
     });

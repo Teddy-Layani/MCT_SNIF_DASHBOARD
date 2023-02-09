@@ -27,6 +27,13 @@ sap.ui.define([
                     case "main":
                         oDefault    = {
                             busy: true,
+                            busyChar01: true, 
+                            busyChar02: true, 
+                            busyChar03: true, 
+                            busyChar04: true, 
+                            busyChar05: true, 
+                            busyChar06: true, 
+                            busyChar07: true, 
                             date:   new Date(),
                             selectedBrand: "",
                             selectedTeam: "1",
@@ -75,13 +82,14 @@ sap.ui.define([
                                 },
                                 title: {
                                     text:       this.getText("COORDINATION"),
+                                    // alignment:  "right",
                                     visible:    true
                                 },
                                 legend: {
                                     visible: false
                                 },
                                 plotArea: {
-                                    colorPalette: ["#" + Math.floor(Math.random()*16777215).toString(16)],//["#007181"],
+                                    colorPalette: ['#3F88C5'],//["#" + Math.floor(Math.random()*16777215).toString(16)],//["#007181"],
                                     gridline: {
                                         visible: false
                                     },
@@ -185,7 +193,7 @@ sap.ui.define([
                                     visible: false
                                 },
                                 plotArea: {
-                                    colorPalette: ["#" + Math.floor(Math.random()*16777215).toString(16)],//["#007181"],
+                                    colorPalette: ['#FFBA08'],//["#" + Math.floor(Math.random()*16777215).toString(16)],//["#007181"],
                                     gridline: {
                                         visible: false
                                     },
@@ -247,7 +255,7 @@ sap.ui.define([
                                     visible: false
                                 },
                                 plotArea: {
-                                    colorPalette: ["#" + Math.floor(Math.random()*16777215).toString(16)],//["#007181"],
+                                    colorPalette: ['#C11111'],//["#" + Math.floor(Math.random()*16777215).toString(16)],//["#007181"],
                                     gridline: {
                                         visible: false
                                     },
@@ -258,7 +266,8 @@ sap.ui.define([
                                         },
                                         hideWhenOverlap: false
                                     }
-                                }                            },
+                                }
+                            },
                             chart06: {
                                 interaction: {
                                     selectability: {
@@ -308,7 +317,7 @@ sap.ui.define([
                                     visible: false
                                 },
                                 plotArea: {
-                                    colorPalette: ["#" + Math.floor(Math.random()*16777215).toString(16)],//["#007181"],
+                                    colorPalette: ['#52D668'], //["#" + Math.floor(Math.random()*16777215).toString(16)],//["#007181"],
                                     gridline: {
                                         visible: false
                                     },
@@ -415,9 +424,9 @@ sap.ui.define([
                                         visible: false
                                     },
                                     label: {
-                                        linesOfWrap: 3,
+                                        linesOfWrap: 2,
                                         rotation: "fixed",
-                                        angle: 0,
+                                        angle: 30,
                                         style: {
                                             fontSize: "12px"
                                         }
@@ -437,7 +446,7 @@ sap.ui.define([
                                     visible: false
                                 },
                                 plotArea: {
-                                    colorPalette: ["#" + Math.floor(Math.random()*16777215).toString(16)],//["#007181"],
+                                    colorPalette: ['#087E8B'], //["#" + Math.floor(Math.random()*16777215).toString(16)],//["#007181"],
                                     gridline: {
                                         visible: false
                                     },

@@ -16,13 +16,13 @@
                     text="{i18n>FILTER_BY}"
                     class="textBold"/>
                 <HBox>
-                    <ComboBox 
+                    <!-- <ComboBox 
                         class="selectRadius sapUiSmallMarginEnd" 
                         selectedKey="{mainView>/selectedTeam}"
                         items="{mainView>/comboBoxTeam}" 
                         selectionChange="onFilterChange" >
                         <core:Item key="{mainView>key}" text="{mainView>text}" />
-                    </ComboBox>
+                    </ComboBox> -->
                     <ComboBox 
                         placeholder="{i18n>BRAND}"
                         selectedKey="{mainView>/selectedBrand}"
@@ -34,6 +34,17 @@
                         class="selectRadius sapUiSmallMarginEnd">
                         <core:Item key="{Brand}" text="{BrandDesc}"/>
                     </ComboBox>
+                    <ComboBox 
+                        placeholder="{i18n>PeriodType}"
+                        selectedKey="{mainView>/PeriodType}"
+                        items="{    
+                            path: '/ZPERIOD_TYPESSet',
+					        sorter: { path: 'Description' }
+				        }"
+                        selectionChange="onFilterChange"
+                        class="selectRadius sapUiSmallMarginEnd">
+                        <core:Item key="{PeriodType}" text="{Description}"/>
+                    </ComboBox>
                     <DatePicker 
                         value="{
                             path:'mainView>/date',
@@ -43,6 +54,7 @@
                                 strictParsing: true
                             }
                         }"
+                        change="onFilterChange"
                         class="sapUiSmallMarginEnd"/>
                 </HBox>
             </HBox>
@@ -55,10 +67,12 @@
                     <viz:Popover id="idPopOverChar01"></viz:Popover>
                     <viz:VizFrame 
                         id="idChar01" 
+                        busy="{mainView>/busyChar01}" 
                         width="35rem"
                         height="20rem"
                         uiConfig="{applicationSet:'fiori'}"
                         vizProperties="{mainView>/chart01}"
+                        renderComplete="renderComplete"
                         vizType='column'>
                         <viz:dataset>
                             <viz.data:FlattenedDataset data="{/ZCOORDINATION_AMOUNTSSet}">
@@ -87,10 +101,12 @@
                     <viz:Popover id="idPopOverChar02"></viz:Popover>
                     <viz:VizFrame 
                         id="idChar02" 
+                        busy="{mainView>/busyChar02}" 
                         width="35rem"
                         height="20rem"
                         uiConfig="{applicationSet:'fiori'}"
                         vizProperties="{mainView>/chart02}"
+                        renderComplete="renderComplete"
                         vizType='donut'>
                         <viz:dataset>
                             <viz.data:FlattenedDataset data="{/ZLEADS_IN_CB_EXCPT_COUNTSet}">
@@ -119,10 +135,12 @@
                     <viz:Popover id="idPopOverChar03"></viz:Popover>
                     <viz:VizFrame 
                         id="idChar03" 
+                        busy="{mainView>/busyChar03}" 
                         width="35rem"
                         height="20rem"
                         uiConfig="{applicationSet:'fiori'}"
                         vizProperties="{mainView>/chart03}"
+                        renderComplete="renderComplete"
                         vizType='donut'>
                         <viz:dataset>
                             <viz.data:FlattenedDataset data="{/ZNEW_LEADS_BRANDS_LVLSet}">
@@ -151,6 +169,7 @@
                     <viz:Popover id="idPopOverChar04"></viz:Popover>
                     <viz:VizFrame 
                         id="idChar04" 
+                        busy="{mainView>/busyChar04}" 
                         width="35rem"
                         height="20rem"
                         uiConfig="{applicationSet:'fiori'}"
@@ -184,6 +203,7 @@
                     <viz:Popover id="idPopOverChar05"></viz:Popover>
                     <viz:VizFrame 
                         id="idChar05" 
+                        busy="{mainView>/busyChar05}" 
                         width="35rem"
                         height="20rem"
                         uiConfig="{applicationSet:'fiori'}"
@@ -217,6 +237,7 @@
                     <viz:Popover id="idPopOverChar06"></viz:Popover>
                     <viz:VizFrame 
                         id="idChar06" 
+                        busy="{mainView>/busyChar06}" 
                         width="35rem"
                         height="20rem"
                         uiConfig="{applicationSet:'fiori'}"
@@ -253,10 +274,12 @@
                     <viz:Popover id="idPopOverChar07"></viz:Popover>
                     <viz:VizFrame 
                         id="idChar07" 
+                        busy="{mainView>/busyChar07}" 
                         width="35rem"
                         height="20rem"
                         uiConfig="{applicationSet:'fiori'}"
                         vizProperties="{mainView>/chart07}"
+                        renderComplete="renderComplete"
                         vizType='column'>
                         <viz:dataset>
                             <viz.data:FlattenedDataset data="{/ZSTATUS_LEADSSet}">
