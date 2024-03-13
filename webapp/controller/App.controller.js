@@ -5,7 +5,7 @@ sap.ui.define(
     function(BaseController) {
       "use strict";
   
-      return BaseController.extend("zcrmmokeddash.controller.App", {
+      return BaseController.extend("zcrmsnifdash.controller.App", {
         onInit() {
         }
       });

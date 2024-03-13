@@ -40,7 +40,7 @@ sap.ui.define([
 								"tileType": "sap.ushell.ui.tile.StaticTile",
 								"properties": {
 									"title": "Moked Dashboard",
-									"targetURL": "#zcrmmokeddash-display"
+									"targetURL": "#zcrmsnifdash-display"
 								}
 							}]
 						}]
@@ -51,8 +51,8 @@ sap.ui.define([
 				"adapter": {
 					"config": {
 						"inbounds": {
-							"zcrmmokeddash-display": {
-								"semanticObject": "zcrmmokeddash",
+							"zcrmsnifdash-display": {
+								"semanticObject": "zcrmsnifdash",
 								"action": "display",
 								"description": "Moked Dashboard",
 								"title": "Moked Dashboard",
@@ -61,8 +61,8 @@ sap.ui.define([
 								},
 								"resolutionResult": {
 									"applicationType": "SAPUI5",
-									"additionalInformation": "SAPUI5.Component=zcrmmokeddash",
-									"url": sap.ui.require.toUrl("zcrmmokeddash")
+									"additionalInformation": "SAPUI5.Component=zcrmsnifdash",
+									"url": sap.ui.require.toUrl("zcrmsnifdash")
 								}
 							}
 						}

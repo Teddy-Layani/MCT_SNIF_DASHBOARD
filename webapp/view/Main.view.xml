@@ -1,281 +1,242 @@
-<mvc:View controllerName="zcrmmokeddash.controller.Main"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+<mvc:View
+    controllerName="zcrmsnifdash.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
     xmlns:viz="sap.viz.ui5.controls"
     xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:micro="sap.suite.ui.microchart"
     xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
     xmlns:core="sap.ui.core"
     xmlns:l="sap.ui.layout"
-	xmlns="sap.m">
+    xmlns="sap.m">
     <Page id="page" title="{i18n>title}">
         <VBox>
-            <HBox
-                justifyContent="SpaceBetween"
-                alignItems="Center"
-                class="sapUiSmallMargin">
-                <Text 
-                    text="{i18n>FILTER_BY}"
-                    class="textBold"/>
+            <HBox justifyContent="SpaceBetween" alignItems="Center" class="sapUiSmallMargin">
+                <!-- <Button text="{i18n>NavigateToList}" press=".onNavToLeads" class="sapUiTinyMarginEnd"/> -->
+                <Text text="{i18n>FILTER_BY}" class="textBold" />
                 <HBox>
-                    <!-- <ComboBox 
+                    
+                    <Button icon="sap-icon://reset" press="onFilterReset" class="sapUiSmallMarginEnd" />
+                    <Select 
+                        id="selectedTeamSelect"
                         class="selectRadius sapUiSmallMarginEnd" 
                         selectedKey="{mainView>/selectedTeam}"
                         items="{mainView>/comboBoxTeam}" 
-                        selectionChange="onFilterChange" >
+                        change="onFilterChange" >
                         <core:Item key="{mainView>key}" text="{mainView>text}" />
-                    </ComboBox> -->
-                    <ComboBox 
-                        placeholder="{i18n>BRAND}"
-                        selectedKey="{mainView>/selectedBrand}"
-                        items="{    
+                    </Select>
+
+                    <ComboBox placeholder="{i18n>BRAND}" selectedKey="{mainView>/selectedBrand}" items="{    
                             path: '/ZBRANDS_4BOARD_VHSet',
 					        sorter: { path: 'BrandDesc' }
-				        }"
-                        selectionChange="onFilterChange"
-                        class="selectRadius sapUiSmallMarginEnd">
-                        <core:Item key="{Brand}" text="{BrandDesc}"/>
+				        }" selectionChange="onFilterChange" class="selectRadius sapUiSmallMarginEnd">
+                        <core:Item key="{Brand}" text="{BrandDesc}" />
                     </ComboBox>
-                    <ComboBox 
-                        placeholder="{i18n>PeriodType}"
-                        selectedKey="{mainView>/PeriodType}"
-                        items="{    
+                    <!-- <ComboBox placeholder="{i18n>PeriodType}" selectedKey="{mainView>/PeriodType}" items="{    
                             path: '/ZPERIOD_TYPESSet',
 					        sorter: { path: 'Description' }
-				        }"
-                        selectionChange="onFilterChange"
-                        class="selectRadius sapUiSmallMarginEnd">
-                        <core:Item key="{PeriodType}" text="{Description}"/>
-                    </ComboBox>
-                    <DatePicker 
-                        value="{
-                            path:'mainView>/date',
-                            type:'sap.ui.model.type.Date',
-                            formatOptions: {
-                                style: 'medium',
-                                strictParsing: true
+				        }" selectionChange="onFilterChange" class="selectRadius sapUiSmallMarginEnd">
+                        <core:Item key="{PeriodType}" text="{Description}" />
+                    </ComboBox> -->
+                    <DateRangeSelection
+                        class="sapUiSmallMarginEnd"
+                    change="onFilterChange"
+                    value="{
+                        'type': 'sap.ui.model.type.DateInterval',
+                        'parts': [
+                            {
+                                'type': 'sap.ui.model.type.Date',
+                                'path': 'mainView>/beginDate'
+                            },
+                            {
+                                'type': 'sap.ui.model.type.Date',
+                                'path': 'mainView>/endDate'
                             }
+                            ]
                         }"
-                        change="onFilterChange"
-                        class="sapUiSmallMarginEnd"/>
+                     />
+                    
                 </HBox>
             </HBox>
-            <l:Grid
-                containerQuery="true"
-                vSpacing="0"
-                defaultSpan="L4 M12 S12">
-                <HBox
-                    class="HBoxShadow sapUiSmallMarginTop">
-                    <viz:Popover id="idPopOverChar01"></viz:Popover>
-                    <viz:VizFrame 
-                        id="idChar01" 
-                        busy="{mainView>/busyChar01}" 
-                        width="35rem"
-                        height="20rem"
-                        uiConfig="{applicationSet:'fiori'}"
-                        vizProperties="{mainView>/chart01}"
-                        renderComplete="renderComplete"
-                        vizType='column'>
+            
+            <l:Grid containerQuery="true" vSpacing="0" defaultSpan="L4 M12 S12">
+                <!-- OPEN_OPPERTUNITIES -->
+                <HBox height="25rem" class="HBoxShadow sapUiSmallMarginTop sapUiTinyMarginBeginEnd"  direction="Column" busy="{mainView>/busyChar01}">
+                    <FlexBox  justifyContent="SpaceBetween" alignItems="End">
+                        <Title text="{i18n>OPEN_OPPERTUNITIES}"  class="sapUiSmallMarginTop sapUiSmallMarginBottom sapUiTinyMarginBeginEnd textBold"/>
+                        <Title text="{i18n>total} {mainView>/sumChar01}" class="sapUiSmallMarginTop sapUiSmallMarginBottom sapUiTinyMarginBeginEnd  textBold"/>
+                    </FlexBox>
+                  <VBox alignItems="Center"> 
+                   <viz:Popover id="idPopOverChar01" />
+                    <viz:VizFrame id="idChar01" 
+                        selectData="onSelectedData" busy="{mainView>/busyChar01}" width="25rem" height="20rem" uiConfig="{applicationSet:'fiori'}" vizProperties="{mainView>/chart01}" renderComplete="renderComplete" vizType='donut'>
                         <viz:dataset>
-                            <viz.data:FlattenedDataset data="{/ZCOORDINATION_AMOUNTSSet}">
+                            <viz.data:FlattenedDataset data="{/ZSNIF_OPP_STATUS_COUNTSSet}">
                                 <viz.data:dimensions>
-                                    <viz.data:DimensionDefinition name="UserstatusDesc"
-                                        value="{UserstatusDesc}" />
+                                    <viz.data:DimensionDefinition name="UserstatusDesc" value="{UserstatusDesc}" />
                                 </viz.data:dimensions>
                                 <viz.data:measures>
-                                    <viz.data:MeasureDefinition name="CountTotal"
-                                        value="{CountTotal}" />
+                                    <viz.data:MeasureDefinition name="CountTotal" value="{CountTotal}" />
                                 </viz.data:measures>
                             </viz.data:FlattenedDataset>
                         </viz:dataset>
 
                         <viz:feeds>
-                            <viz.feeds:FeedItem uid="valueAxis" type="Measure"
-                                values="CountTotal" />
-                            <viz.feeds:FeedItem uid="categoryAxis" type="Dimension"
-                                values="UserstatusDesc" />
+                            <viz.feeds:FeedItem uid="size" type="Measure" values="CountTotal" />
+                            <viz.feeds:FeedItem uid="color" type="Dimension" values="UserstatusDesc" />
                         </viz:feeds>
                     </viz:VizFrame>
-                </HBox>
+                    </VBox>
+               </HBox>
+                
+                 
+                <HBox id="idPopOverChar02" height="25rem" class="HBoxShadow sapUiSmallMarginTop sapUiTinyMarginBeginEnd"   direction="Column" busy="{mainView>/busyChar02}">
+                    <FlexBox  justifyContent="SpaceBetween" alignItems="Start">
+                        <Title text="{i18n>STATUS_LEADS_BY_SLA}" class="sapUiSmallMarginTop sapUiSmallMarginBottom sapUiTinyMarginBeginEnd textBold "/>
+                        <Title text="{i18n>total} {mainView>/sumChar02}" class="sapUiSmallMarginTop sapUiSmallMarginBottom sapUiTinyMarginBeginEnd textBold"/>
+                    </FlexBox>
+                  <VBox alignItems="Center"> 
+                    <!-- <Title text="{i18n>STATUS_LEADS_BY_SLA}" class="sapUiSmallMarginTop sapUiSmallMarginBottom textBold" visible="{= !${mainView>/busyChar02}}"/> -->
+                        <micro:ComparisonMicroChart id="idChar02" size="L"  width="22rem" height="20rem" modelContextChange="renderComplete" class="sapMFlexBoxBGTransparent sapUiSmallMarginTopBottom sapUiTinyMarginLeft sapUiTinyMarginRight" data="{path:'/ZSNIF_LEAD_SLA_COUNTSSet'}">
+                            <micro:data>
+                                <micro:ComparisonMicroChartData press="onMicroPress" title="{TimeframeDesc}" value="{CountTotal}" color="{Color}" />
+                            </micro:data>
+                        </micro:ComparisonMicroChart>
+               </VBox>
+               </HBox> 
 
-                <HBox
-                    class="HBoxShadow sapUiSmallMarginTop">
-                    <viz:Popover id="idPopOverChar02"></viz:Popover>
-                    <viz:VizFrame 
-                        id="idChar02" 
-                        busy="{mainView>/busyChar02}" 
-                        width="35rem"
-                        height="20rem"
-                        uiConfig="{applicationSet:'fiori'}"
-                        vizProperties="{mainView>/chart02}"
-                        renderComplete="renderComplete"
-                        vizType='donut'>
+
+                <!-- STATUS_OPEN_LEADS -->
+               <HBox  height="25rem" class="HBoxShadow sapUiSmallMarginTop sapUiTinyMarginBeginEnd"  direction="Column" busy="{mainView>/busyChar03}">
+                    <FlexBox  justifyContent="SpaceBetween" alignItems="End">
+                     <Title text="{i18n>STATUS_OPEN_LEADS}" class="sapUiSmallMarginTop sapUiSmallMarginBottom sapUiTinyMarginBeginEnd textBold "/>
+                        <Title text="{i18n>total} {mainView>/sumChar03}" class="sapUiSmallMarginTop sapUiSmallMarginBottom sapUiTinyMarginBeginEnd textBold"/>
+                    </FlexBox>
+                  <VBox alignItems="Center">
+                  <viz:Popover id="idPopOverChar03" />
+                    <viz:VizFrame id="idChar03" 
+                        selectData="onSelectedData" busy="{mainView>/busyChar03}" width="25rem" height="20rem" uiConfig="{applicationSet:'fiori'}" vizProperties="{mainView>/chart03}" renderComplete="renderComplete" vizType='donut'>
                         <viz:dataset>
-                            <viz.data:FlattenedDataset data="{/ZLEADS_IN_CB_EXCPT_COUNTSet}">
+                            <viz.data:FlattenedDataset data="{/ZSNIF_LEAD_STATUS_COUNTSSet}">
                                 <viz.data:dimensions>
-                                    <viz.data:DimensionDefinition name="PartnerName"
-                                        value="{PartnerName}" />
+                                    <viz.data:DimensionDefinition name="UserstatusDesc" value="{UserstatusDesc}" />
                                 </viz.data:dimensions>
                                 <viz.data:measures>
-                                    <viz.data:MeasureDefinition name="CountTotal"
-                                        value="{CountTotal}" />
+                                    <viz.data:MeasureDefinition name="CountTotal" value="{CountTotal}" />
                                 </viz.data:measures>
                             </viz.data:FlattenedDataset>
                         </viz:dataset>
 
                         <viz:feeds>
-                            <viz.feeds:FeedItem uid="size" type="Measure"
-                                values="CountTotal" />
-                            <viz.feeds:FeedItem uid="color" type="Dimension"
-                                values="PartnerName" />
+                            <viz.feeds:FeedItem uid="size" type="Measure" values="CountTotal" />
+                            <viz.feeds:FeedItem uid="color" type="Dimension" values="UserstatusDesc" />
                         </viz:feeds>
                     </viz:VizFrame>
-                </HBox>
-
-                <HBox
-                    class="HBoxShadow sapUiSmallMarginTop">
-                    <viz:Popover id="idPopOverChar03"></viz:Popover>
-                    <viz:VizFrame 
-                        id="idChar03" 
-                        busy="{mainView>/busyChar03}" 
-                        width="35rem"
-                        height="20rem"
-                        uiConfig="{applicationSet:'fiori'}"
-                        vizProperties="{mainView>/chart03}"
-                        renderComplete="renderComplete"
-                        vizType='donut'>
+                 </VBox>
+               </HBox> 
+                <!-- MEETINGS_FOR_DELIEVERIES -->
+                 <HBox  height="25rem" class="HBoxShadow sapUiSmallMarginTop"  direction="Column" busy="{mainView>/busyChar04}">
+                    <FlexBox  justifyContent="SpaceBetween" alignItems="Start">
+                        <Title text="{i18n>MEETINGS_FOR_DELIEVERIES}" class="sapUiSmallMarginTop sapUiSmallMarginBottom sapUiTinyMarginBeginEnd textBold "/>
+                        <Title text="{i18n>total} {mainView>/sumChar04}" class="sapUiSmallMarginTop sapUiSmallMarginBottom sapUiTinyMarginBeginEnd textBold"/>
+                    </FlexBox>
+                  <VBox alignItems="Center">
+                    <viz:Popover id="idPopOverChar04" />
+                    <viz:VizFrame id="idChar04" 
+                        selectData="onSelectedData" busy="{mainView>/busyChar04}" width="25rem" height="20rem" uiConfig="{applicationSet:'fiori'}" vizProperties="{mainView>/chart04}" renderComplete="renderComplete" vizType='column'>
                         <viz:dataset>
-                            <viz.data:FlattenedDataset data="{/ZNEW_LEADS_BRANDS_LVLSet}">
+                            <viz.data:FlattenedDataset data="{/ZSNIF_APP_PARTNER_COUNTSSet}">
                                 <viz.data:dimensions>
-                                    <viz.data:DimensionDefinition name="BrandDesc"
-                                        value="{BrandDesc}" />
+                                    <viz.data:DimensionDefinition name="Fullname" value="{Fullname}" />
                                 </viz.data:dimensions>
                                 <viz.data:measures>
-                                    <viz.data:MeasureDefinition name="CountTotal"
-                                        value="{CountTotal}" />
+                                    <viz.data:MeasureDefinition name="CountTotal" value="{CountTotal}" />
                                 </viz.data:measures>
                             </viz.data:FlattenedDataset>
                         </viz:dataset>
 
                         <viz:feeds>
-                            <viz.feeds:FeedItem uid="size" type="Measure"
-                                values="CountTotal" />
-                            <viz.feeds:FeedItem uid="color" type="Dimension"
-                                values="BrandDesc" />
+                            <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="CountTotal" />
+                            <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Fullname" />
                         </viz:feeds>
                     </viz:VizFrame>
-                </HBox>
+                </VBox>
+               </HBox> 
 
-                <HBox
-                    class="HBoxShadow sapUiSmallMarginTop">
-                    <viz:Popover id="idPopOverChar04"></viz:Popover>
-                    <viz:VizFrame 
-                        id="idChar04" 
-                        busy="{mainView>/busyChar04}" 
-                        width="35rem"
-                        height="20rem"
-                        uiConfig="{applicationSet:'fiori'}"
-                        vizProperties="{mainView>/chart04}"
-                        renderComplete="renderComplete"
-                        vizType='column'>
+                <!-- TEST_DRIVE_TODAY -->
+                <HBox  height="25rem" class="HBoxShadow sapUiSmallMarginTop"  direction="Column" busy="{mainView>/busyChar03}">
+                    <FlexBox  justifyContent="SpaceBetween" alignItems="Start">
+                        <Title text="{i18n>TEST_DRIVE_TODAY}" class="sapUiSmallMarginTop sapUiSmallMarginBottom sapUiTinyMarginBeginEnd textBold "/>
+                        <Title text="{i18n>total} {mainView>/sumChar05}" class="sapUiSmallMarginTop sapUiSmallMarginBottom sapUiTinyMarginBeginEnd textBold"/>
+                    </FlexBox>
+                  <VBox alignItems="Center">
+                    <viz:Popover id="idPopOverChar05" />
+                    <viz:VizFrame id="idChar05" 
+                        selectData="onSelectedData" busy="{mainView>/busyChar05}" width="25rem" height="20rem" uiConfig="{applicationSet:'fiori'}" vizProperties="{mainView>/chart05}" renderComplete="renderComplete" vizType='donut'>
                         <viz:dataset>
-                            <viz.data:FlattenedDataset data="{/ZHOT_TRANSFFERED_LEADSSet}">
+                            <viz.data:FlattenedDataset data="{/ZSNIF_ZMTD_STATUS_COUNTSSet}">
                                 <viz.data:dimensions>
-                                    <viz.data:DimensionDefinition name="OrgUnitDesc"
-                                        value="{OrgUnitDesc}" />
+                                    <viz.data:DimensionDefinition name="UserstatusDesc" value="{UserstatusDesc}" />
                                 </viz.data:dimensions>
                                 <viz.data:measures>
-                                    <viz.data:MeasureDefinition name="CountTotal"
-                                        value="{CountTotal}" />
+                                    <viz.data:MeasureDefinition name="CountTotal" value="{CountTotal}" />
                                 </viz.data:measures>
                             </viz.data:FlattenedDataset>
                         </viz:dataset>
 
                         <viz:feeds>
-                            <viz.feeds:FeedItem  uid="valueAxis" type="Measure"
-                                values="CountTotal" />
-                            <viz.feeds:FeedItem  uid="categoryAxis" type="Dimension"
-                                values="OrgUnitDesc" />
+                            <viz.feeds:FeedItem uid="size" type="Measure" values="CountTotal" />
+                            <viz.feeds:FeedItem uid="color" type="Dimension" values="UserstatusDesc" />
                         </viz:feeds>
                     </viz:VizFrame>
-                </HBox>
+                             </VBox>
+               </HBox> 
 
-                <HBox
-                    class="HBoxShadow sapUiSmallMarginTop">
-                    <viz:Popover id="idPopOverChar05"></viz:Popover>
-                    <viz:VizFrame 
-                        id="idChar05" 
-                        busy="{mainView>/busyChar05}" 
-                        width="35rem"
-                        height="20rem"
-                        uiConfig="{applicationSet:'fiori'}"
-                        vizProperties="{mainView>/chart05}"
-                        renderComplete="renderComplete"
-                        vizType='column'>
+                <!-- SLA_OPP -->
+               <HBox id="idPopOverChar06" height="25rem" class="HBoxShadow sapUiSmallMarginTop sapUiTinyMarginBeginEnd"   direction="Column" busy="{mainView>/busyChar06}">
+                    <FlexBox  justifyContent="SpaceBetween" alignItems="Start">
+                        <Title text="{i18n>SLA_OPPERTUNITIES}" class="sapUiSmallMarginTop sapUiSmallMarginBottom sapUiTinyMarginBeginEnd textBold "/>
+                        <Title text="{i18n>total} {mainView>/sumChar06}" class="sapUiSmallMarginTop sapUiSmallMarginBottom sapUiTinyMarginBeginEnd textBold"/>
+                    </FlexBox>
+                  <VBox alignItems="Center"> 
+                    <micro:ComparisonMicroChart id="idChar06" press="onMicroPress" size="L" width="22rem" height="20rem" modelContextChange="renderComplete" class="sapMFlexBoxBGTransparent sapUiSmallMarginTopBottom sapUiTinyMarginLeft sapUiTinyMarginRight" data="{path:'/ZSNIF_OPP_SLA_COUNTSSet'}">
+                        <micro:data>
+                            <micro:ComparisonMicroChartData title="{TimeframeDesc}" value="{CountTotal}" color="{Color}" />
+                        </micro:data>
+                    </micro:ComparisonMicroChart>
+                            </VBox>
+               </HBox>
+                <!-- <HBox class="HBoxShadow sapUiSmallMarginTop">
+                    <viz:Popover id="idPopOverChar06" />
+                    <viz:VizFrame id="idChar06" busy="{mainView>/busyChar06}" width="35rem" height="25rem" uiConfig="{applicationSet:'fiori'}" vizProperties="{mainView>/chart06}" renderComplete="renderComplete" vizType='bar'>
                         <viz:dataset>
-                            <viz.data:FlattenedDataset data="{/ZLEADS_TRANSFERRED_SALESPERSONSet}">
+                            <viz.data:FlattenedDataset data="{/ZSNIF_OPP_SLA_COUNTSSet}">
                                 <viz.data:dimensions>
-                                    <viz.data:DimensionDefinition name="OrgUnitDesc"
-                                        value="{OrgUnitDesc}" />
+                                    <viz.data:DimensionDefinition name="TimeframeDesc" value="{TimeframeDesc}" />
                                 </viz.data:dimensions>
                                 <viz.data:measures>
-                                    <viz.data:MeasureDefinition name="CountTotal"
-                                        value="{CountTotal}" />
+                                    <viz.data:MeasureDefinition name="CountTotal" value="{CountTotal}" />
                                 </viz.data:measures>
                             </viz.data:FlattenedDataset>
                         </viz:dataset>
 
                         <viz:feeds>
-                            <viz.feeds:FeedItem  uid="valueAxis" type="Measure"
-                                values="CountTotal" />
-                            <viz.feeds:FeedItem  uid="categoryAxis" type="Dimension"
-                                values="OrgUnitDesc" />
+                            <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="CountTotal" />
+                            <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="TimeframeDesc" />
                         </viz:feeds>
                     </viz:VizFrame>
-                </HBox>
+                </HBox> -->
 
-                <HBox
-                    class="HBoxShadow sapUiSmallMarginTop">
-                    <viz:Popover id="idPopOverChar06"></viz:Popover>
-                    <viz:VizFrame 
-                        id="idChar06" 
-                        busy="{mainView>/busyChar06}" 
-                        width="35rem"
-                        height="20rem"
-                        uiConfig="{applicationSet:'fiori'}"
-                        vizProperties="{mainView>/chart06}"
-                        renderComplete="renderComplete"
-                        vizType='column'>
-                        <viz:dataset>
-                            <viz.data:FlattenedDataset data="{/ZLEAD_MAINT_BY_SALESPERSONSSet}">
-                                <viz.data:dimensions>
-                                    <viz.data:DimensionDefinition name="OrgUnitDesc"
-                                        value="{OrgUnitDesc}" />
-                                </viz.data:dimensions>
-                                <viz.data:measures>
-                                    <viz.data:MeasureDefinition name="CountTotal"
-                                        value="{CountTotal}" />
-                                </viz.data:measures>
-                            </viz.data:FlattenedDataset>
-                        </viz:dataset>
+                <!-- <HBox
+                    class="sapUiSmallMarginTop"/> -->
 
-                        <viz:feeds>
-                            <viz.feeds:FeedItem  uid="valueAxis" type="Measure"
-                                values="CountTotal" />
-                            <viz.feeds:FeedItem  uid="categoryAxis" type="Dimension"
-                                values="OrgUnitDesc" />
-                        </viz:feeds>
-                    </viz:VizFrame>
-                </HBox>
-
-                <HBox
-                    class="sapUiSmallMarginTop"/>
-
-                <HBox
+                <!-- <HBox
                     class="HBoxShadow sapUiSmallMarginTop">
                     <viz:Popover id="idPopOverChar07"></viz:Popover>
                     <viz:VizFrame 
                         id="idChar07" 
                         busy="{mainView>/busyChar07}" 
-                        width="35rem"
+                        width="33rem"
                         height="20rem"
                         uiConfig="{applicationSet:'fiori'}"
                         vizProperties="{mainView>/chart07}"
@@ -300,9 +261,9 @@
                             <viz.feeds:FeedItem uid="categoryAxis" type="Dimension"
                                 values="Description" />
                         </viz:feeds>
-                    </viz:VizFrame>
+                    </viz:VizFrame> -->
 
-                    <!-- <viz:VizFrame 
+                <!-- <viz:VizFrame 
                         id="idChar07" 
                         width="35rem"
                         height="20rem"
@@ -329,19 +290,14 @@
                                 values="Description" />
                         </viz:feeds>
                     </viz:VizFrame> -->
-                </HBox>
+                <!-- </HBox> -->
 
-                <HBox
-                    class="sapUiSmallMarginTop">
-                </HBox>
+                <HBox class="sapUiSmallMarginTop" />
+            </l:Grid>
 
-   		    </l:Grid>
-            
-            <HBox>
-            </HBox>
-            
-            <HBox>
-            </HBox>
+            <HBox />
+
+            <HBox />
         </VBox>
     </Page>
 </mvc:View>

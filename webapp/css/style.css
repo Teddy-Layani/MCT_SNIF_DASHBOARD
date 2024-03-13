@@ -12,3 +12,24 @@
 .textBold {
     font-weight: bold;
 }
+
+.sapSuiteCpMCVerticalAlignmentContainer{
+    max-width: 100% !important;
+}
+.sapSuiteCpMCChartBar>div {
+    margin-top: 0.35rem !important;
+}
+.sapSuiteCpMCVerticalAlignmentContainer{
+    font-family: "100","100full",Arial,Helvetica,sans-serif !important;
+}
+
+.sapSuiteCpMCChartContent.sapSuiteCpMCLookL .sapSuiteCpMCChartItem {
+    margin-bottom: 2rem !important;
+}
+.sapSuiteCpMCChartContent.sapSuiteCpMCLookM .sapSuiteCpMCChartItem {
+    margin-bottom: 2rem !important;
+}
+
+.sapSuiteCpMCChartContent.sapSuiteCpMCLookL {
+    font-size: 1rem !important;
+}

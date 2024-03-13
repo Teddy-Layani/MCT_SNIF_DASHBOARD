@@ -5,12 +5,12 @@
 sap.ui.define([
         "sap/ui/core/UIComponent",
         "sap/ui/Device",
-        "zcrmmokeddash/model/models"
+        "zcrmsnifdash/model/models"
     ],
     function (UIComponent, Device, models) {
         "use strict";
 
-        return UIComponent.extend("zcrmmokeddash.Component", {
+        return UIComponent.extend("zcrmsnifdash.Component", {
             metadata: {
                 manifest: "json"
             },
