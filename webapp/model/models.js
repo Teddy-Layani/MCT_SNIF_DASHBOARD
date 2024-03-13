@@ -70,9 +70,10 @@ sap.ui.define([
                                         mode: "SINGLE"
                                     }
                                 },
-                                // title: {
-                                //     text: this.getText("OPEN_OPPERTUNITIES")
-                                // },
+                                title: {
+                                    text:       "",
+                                    visible:    false
+                                },
                                 dataLabel: {
                                     line: {
                                         visible: false
@@ -110,7 +111,8 @@ sap.ui.define([
                                     }
                                 },
                                 title: {
-                                    text: this.getText("STATUS_LEADS_BY_SLA")
+                                    text: this.getText("STATUS_LEADS_BY_SLA"),
+                                    visible: false
                                 },
                                 dataLabel: {
                                     visible: false,
@@ -133,6 +135,10 @@ sap.ui.define([
                                     selectability: {
                                         mode: "SINGLE"
                                     }
+                                },
+                                title: {
+                                    text:       "",
+                                    visible:    false
                                 },
                                 dataLabel: {
                                     line: {
@@ -159,7 +165,7 @@ sap.ui.define([
                                 // },
                                 legendGroup: {
                                     layout: {
-                                        maxWidth: 0.65,
+                                        maxWidth: 0.35,
                                         position: "right"
                                     }
                                 }
@@ -170,17 +176,30 @@ sap.ui.define([
                                         mode: "SINGLE"
                                     }
                                 },
+                                title: {
+                                    text:       "",
+                                    visible:    false
+                                },
                                 legend: {
                                     visible: false
                                 },
+                                dataLabel: {
+                                    line: {
+                                        visible: false
+                                    },
+                                    positionPreference: false,
+                                    automaticInOutside: false,
+                                    outsideVisible: false,
+                                    position: 'inside',
+                                    visible: true,
+                                    type: 'value',
+                                    linesOfWrap: 2,
+                                    hideWhenOverlap: false
+                                },                                
                                 plotArea: {
                                     gridline: {
                                         visible: false
                                     }
-                                },
-                                title: {
-                                    text: this.getText("MEETINGS_FOR_DELIEVERIES"),
-                                    visible: false
                                 },
                                 valueAxis: {
                                     title: {
@@ -201,6 +220,10 @@ sap.ui.define([
                                 categoryAxis: {
                                     title: {
                                         visible: false
+                                    },
+                                    title: {
+                                        text:       "",
+                                        visible:    false
                                     },
                                     label: {
                                         linesOfWrap: 2,
@@ -302,7 +325,7 @@ sap.ui.define([
                                 title: {
                                     text: this.getText("COORDINATION"),
                                     // alignment:  "right",
-                                    visible: true
+                                    visible: false
                                 },
                                 legend: {
                                     visible: false
